@@ -1,11 +1,12 @@
 import sys  
 import asyncio  
 import aiohttp
-
 from bs4 import BeautifulSoup
 import csv
 
-future = asyncio.Future()
+# These two variables determine if we're on the final task or not.
+our_count = 0
+csv_len = 0
 
 loop = asyncio.get_event_loop()  
 client = aiohttp.ClientSession(loop=loop)
@@ -166,7 +167,14 @@ async def parse_gsa_webpage(product):
                             if 'catalog' in v.select('font[size="2"] a')[0].get('href'):
                                 newlink = 'https://www.gsaadvantage.gov' + v.select('font[size="2"] a')[
                                     0].get('href')
+
+                                #added as placeholder.
                                 print('VENDOR LINK FOUND: ' + newlink)
+
+                                ##########################
+                                # This is our problem area.
+                                ##########################
+
                                 # # if newlink != None and link != newlink and newlink not in links:
                                 #     links.append(newlink)
                                 #     res2 = await get_vendor_page(client, newlink)
@@ -266,7 +274,6 @@ async def parse_gsa_webpage(product):
                 else:
                     continue
 
-            # csv_obj[0].pop(-1)
             outputwriter.writerow(csv_obj[0])
             csv_obj[0] = []
             outputwriter.writerow(csv_obj[1])
@@ -276,12 +283,21 @@ async def parse_gsa_webpage(product):
                     outputwriter.writerow(item)
             csv_obj[2] = []
             print('writerow')
-            # print(links)
-    
+
+    global our_count
+    global csv_len
+
+    our_count += 1
+
+    if our_count == csv_len:
+        loop.stop()
+        await client.close()
+        print('All tasks completed.')
 
 for i, item in enumerate(productList):
-    asyncio.ensure_future(parse_gsa_webpage(item))
-
-loop.run_until_complete(future)
-
-loop.close()
+    csv_len += 1
+    asyncio.ensure_future(parse_gsa_webpage(item), loop = loop)
+try:
+    loop.run_forever()
+finally:
+    loop.close()
