@@ -7,7 +7,7 @@ This is an async re-write of the scrape.py module. This only performs the second
 - python3 pipinstaller.py
 
 # PEFORMING A SCRAPE
-### Get a proxy ip address and port such as '111.11.111.111:80' from https://free-proxy-list.net/
+### Get a proxy ip address and port such as **111.11.111.111:80** from https://free-proxy-list.net/
 - You can click the Https table header and it will sort either way
 - Confirm the Https column value is 'Yes'
 - Confirm the Anonymity column value is 'Anonymous'
@@ -32,4 +32,4 @@ This is an async re-write of the scrape.py module. This only performs the second
 - You can then just run it again and it'll start from where it left off. just remember to move final.csv, or rename it. it will be overwritten if you don't and you might lose what you just ran.
 
 ##### Q. Program never makes an http request after I run it (403 forbidden/proxyError)? 
-Try again with a different proxy.
+- Try again with a different proxy.
