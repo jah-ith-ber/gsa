@@ -1,30 +1,25 @@
 This is an async re-write of the scrape.py module. This only performs the second-half (scrape), not the search itself. You can still run the search from the original.
 
-# This is a command-line utility - first open cmd
+### This is a command-line utility - first open cmd
 In your windows search bar, type in 'cmd' and hit enter.
 
-# Install the module dependencies with python via Entering in your cmd/terminal
+### Install the module dependencies with python via Entering in your cmd/terminal
 python3 pipinstaller.py
 
-##################
-PEFORMING A SCRAPE
-##################
+# PEFORMING A SCRAPE
+### Get a proxy ip address and port such as '111.11.111.111:80' from https://free-proxy-list.net/
+You can click the Https table header and it will sort either way
+Confirm the Https column value is 'Yes'
+Confirm the Anonymity column value is 'Anonymous'
 
-# Get a proxy ip adress/port such as '111.11.111.111:80' from https://free-proxy-list.net/
-You can click the Https header and it will sort either way
-* Confirm the Https column value is 'Yes'
-* Confirm the Anonymity column value is 'Anonymous'
-
-# Run the program by entering
+### Run the program by entering
 python3 main.py
-* Enter the IP (111.11.111.111) when prompted by the program
-* Enter the port (80 in this example)
+Enter the IP (111.11.111.111) when prompted by the program
+Enter the port (80 in this example)
 
-# Wait for the program to complete, then check final.csv. See troubleshooting below for errors.
+### Wait for the program to complete, then check final.csv. See troubleshooting below for errors.
 
-###############
-Troubleshooting
-###############
+#### Troubleshooting
 
 Q. How is the final.csv delimited?
 The final.csv is semicolon delimited.
