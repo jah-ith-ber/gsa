@@ -9,7 +9,9 @@ our_count = 0
 csv_len = 0
 
 loop = asyncio.get_event_loop()  
-client = aiohttp.ClientSession(loop=loop)
+
+connector = aiohttp.TCPConnector(limit=50)
+client = aiohttp.ClientSession(loop=loop,connector=connector)
 
 proxy_url = input('Enter proxy url: ')
 proxy_port = input('Enter proxy port: ')
