@@ -28,7 +28,7 @@ outputwriter = csv.writer(outputfile, delimiter=';')
 
 semaphore = asyncio.BoundedSemaphore(20)
 
-# Tried using 2 separate async functions - one for initial, one for vendor links
+# Our async .get function
 async def get_page(client, url):  
     try:
         async with client.get(url, proxy=httpproxy) as response:
@@ -36,11 +36,6 @@ async def get_page(client, url):
                 return await response.read()
     except:
         return False
-
-# async def get_vendor_page(client, url):  
-#     async with client.get(url, proxy=httpproxy) as r:
-#         if r.status == 200:
-#             return await r.read()
 
 # Our main async function
 async def parse_gsa_webpage(product, sem):
