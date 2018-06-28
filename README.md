@@ -8,14 +8,14 @@ python3 pipinstaller.py
 
 # PEFORMING A SCRAPE
 ### Get a proxy ip address and port such as '111.11.111.111:80' from https://free-proxy-list.net/
-You can click the Https table header and it will sort either way
-Confirm the Https column value is 'Yes'
-Confirm the Anonymity column value is 'Anonymous'
+- You can click the Https table header and it will sort either way
+- Confirm the Https column value is 'Yes'
+- Confirm the Anonymity column value is 'Anonymous'
 
 ### Run the program by entering
 python3 main.py
-Enter the IP (111.11.111.111) when prompted by the program
-Enter the port (80 in this example)
+- Enter the IP (111.11.111.111) when prompted by the program
+- Enter the port (80 in this example)
 
 ### Wait for the program to complete, then check final.csv. See troubleshooting below for errors.
 
