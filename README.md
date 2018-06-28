@@ -30,7 +30,7 @@ This is an async re-write of the scrape.py module. This only performs the second
 - If it's not budging, close out the program with ctrl+c (don't click the X button) and check that final.csv was written to.
 - If it gets a ways through, an option would be to find where the scraper left off. You can look at the ending product numbers in final.csv. 
 - You can then rename final.csv to something else, and then remove the upper products that did run in productLinks.csv.
-- You can then just run it again and it'll start from where it left off. just remember to move final.csv, or rename it. it will be overwritten if you don't and you might lose what you just ran.
+- You can then just run it again and it'll start from where it left off. Just remember to rename final.csv. It will be overwritten if you don't and you might lose what you just ran!
 
 ##### Q. Program never makes an http request after I run it (403 forbidden/proxyError)? 
 - Try again with a different proxy.
