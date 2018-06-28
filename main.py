@@ -10,8 +10,8 @@ csv_len = 0
 
 loop = asyncio.get_event_loop()  
 
-# connector = aiohttp.TCPConnector(limit=50)
-client = aiohttp.ClientSession(loop=loop)
+connector = aiohttp.TCPConnector(limit=20,force_close=True,enable_cleanup_closed=True,limit_per_host=20)
+client = aiohttp.ClientSession(loop=loop,connector=connector)
 
 proxy_url = input('Enter proxy url: ')
 proxy_port = input('Enter proxy port: ')
@@ -31,14 +31,17 @@ links = []
 
 # Tried using 2 separate async functions - one for initial, one for vendor links
 async def get_page(client, url):  
-    async with client.get(url, proxy=httpproxy) as response:
-        if response.status == 200:
-            return await response.read()
+    try:
+        async with client.get(url, proxy=httpproxy) as response:
+            if response.status == 200:
+                return await response.read()
+    except:
+        return False
 
-async def get_vendor_page(client, url):  
-    async with client.get(url, proxy=httpproxy) as r:
-        if r.status == 200:
-            return await r.read()
+# async def get_vendor_page(client, url):  
+#     async with client.get(url, proxy=httpproxy) as r:
+#         if r.status == 200:
+#             return await r.read()
 
 # Our main async function
 async def parse_gsa_webpage(product):
@@ -55,9 +58,12 @@ async def parse_gsa_webpage(product):
         for link in prodUrls:
             # If we haven't visited this link
             if link not in links:
+                print('initial request made to:')
+
                 # Grab the page asyncronously
                 html_to_parse = await get_page(client, link)
-                print('initial request made to:')            
+                if html_to_parse == False:
+                    return
                 print(link)
                 # Throw the link in links
                 links.append(link)
@@ -169,81 +175,6 @@ async def parse_gsa_webpage(product):
                             if 'catalog' in v.select('font[size="2"] a')[0].get('href'):
                                 newlink = 'https://www.gsaadvantage.gov' + v.select('font[size="2"] a')[
                                     0].get('href')
-
-                                #added as placeholder.
-                                print('VENDOR LINK FOUND: ' + newlink)
-
-                                ##########################
-                                # This is our problem area.
-                                ##########################
-
-                                # # if newlink != None and link != newlink and newlink not in links:
-                                #     links.append(newlink)
-                                #     res2 = await get_vendor_page(client, newlink)
-
-                                #     soup2 = BeautifulSoup(res2, 'lxml')
-
-                                #     nameTable2 = soup2.findAll(attrs={
-                                #         'width': "100%",
-                                #         'border': "0",
-                                #         'cellspacing': "0",
-                                #         'cellpadding': "0",
-                                #         'class': "black8pt"
-                                #     })
-
-                                #     moreSpecs2 = soup2.findAll(attrs={
-                                #         'width': "100%",
-                                #         'border': "0",
-                                #         'cellspacing': "0",
-                                #         'cellpadding': "1",
-                                #         'class': "black8pt"
-                                #     })
-
-                                #     # Spects/Description tabs
-                                #     specsTab2 = ''
-                                #     additionalDesc2 = ''
-
-                                #     descTable2 = soup2.findAll(
-                                #         id='TabbedPanels1')
-
-                                #     if len(descTable2) > 0:
-                                #         tabPanelLabels2 = descTable2[0].ul.findAll(
-                                #             'li')
-                                #         if len(descTable2[0].select('.comment')) > 0:
-                                #             additionalDesc2 = descTable2[0].select(
-                                #                 '.comment')
-                                #         tabPanelContent2 = descTable2[0].select(
-                                #             ".TabbedPanelsContent table")
-                                #         tabPanelContent3 = descTable2[0].select(
-                                #             ".TabbedPanelsContentGroup td div")
-                                #         our2List.append(newlink)
-                                #         for div in tabPanelContent3:
-                                #             our2List.append(
-                                #                 div.get_text().strip())
-                                #         if len(additionalDesc2) > 0:
-                                #             our2List.append(
-                                #                 additionalDesc2[0].get_text().strip())
-
-                                #     if len(tabPanelContent2) > 1:
-                                #         speclist2 = tabPanelContent2[1].findAll(
-                                #         'tr')
-                                #     else:
-                                #         speclist2 = []
-
-                                #     if len(speclist2) > 0:
-                                #         for spec in speclist2:
-                                #             specs = spec.findAll('td')
-                                #             if len(specs) > 1:
-                                #                 for i, v in enumerate(specs):
-                                #                     if i == 1:
-                                #                         specsTab2 += str(v.string) + \
-                                #                             '. '
-                                #                     else:
-                                #                         specsTab2 += str(v.string) + \
-                                #                             ': '
-                                #         our2List.append(
-                                #             specsTab2)
-
                 for e, v in enumerate(row_ths):
                     print(e, ' - theaders iteration')
                     if i == 0:
