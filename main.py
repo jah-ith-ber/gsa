@@ -10,8 +10,8 @@ csv_len = 0
 
 loop = asyncio.get_event_loop()  
 
-connector = aiohttp.TCPConnector(limit=50)
-client = aiohttp.ClientSession(loop=loop,connector=connector)
+# connector = aiohttp.TCPConnector(limit=50)
+client = aiohttp.ClientSession(loop=loop)
 
 proxy_url = input('Enter proxy url: ')
 proxy_port = input('Enter proxy port: ')
@@ -290,6 +290,9 @@ async def parse_gsa_webpage(product):
     global csv_len
 
     our_count += 1
+
+    print('our_count = ', our_count)
+    print('csv_len = ', csv_len)
 
     if our_count == csv_len:
         loop.stop()

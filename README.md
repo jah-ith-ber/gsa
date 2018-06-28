@@ -1,35 +1,41 @@
-Quick Start
+This is an async re-write of the scrape.py module. This only performs the second-half (scrape), not the search itself. You can still run the search from the original.
 
-Install the module dependencies with python via entering in your cmd/terminal
-1. python3 pipinstaller.py
+# This is a command-line utility - first open cmd
+In your windows search bar, type in 'cmd' and hit enter.
 
-2. make sure productLinks.csv is in the same directory as main.py.
+# Install the module dependencies with python via Entering in your cmd/terminal
+python3 pipinstaller.py
 
-get a proxy ip/port
-3. get a proxy ip adress/port such as 173.36.255.167 and 80 from https://free-proxy-list.net/
+##################
+PEFORMING A SCRAPE
+##################
 
-Run main.py from your terminal/cmd with the command
-4. python main.py
-  a. enter the ip when prompted (173.36.255.167) and hit enter
-  b. enter the port (80) and hit enter
+# Get a proxy ip adress/port such as '111.11.111.111:80' from https://free-proxy-list.net/
+You can click the Https header and it will sort either way
+* Confirm the Https column value is 'Yes'
+* Confirm the Anonymity column value is 'Anonymous'
 
+# Run the program by entering
+python3 main.py
+* Enter the IP (111.11.111.111) when prompted by the program
+* Enter the port (80 in this example)
 
-======
+# Wait for the program to complete, then check final.csv. See troubleshooting below for errors.
 
-
-The final.csv is semicolon delimited
-
-
-==========
+###############
 Troubleshooting
- ==========
+###############
 
- Stuck or errored out? 
- 
- a. If the last message was 'writerow' it may be completed.
+Q. How is the final.csv delimited?
+The final.csv is semicolon delimited.
 
- b. Close out the program with cmd/ctrl+c and check that final.csv was written to. if it did, see where it left off. Then you can edit the productLinks.csv to where it left off, re-name the final.csv from the last run, and you can start a new one.
+Q. The last message was 'writerow' and it's sitting there
+It may be completed and hanging. 
 
- Program never makes an http request? 
- 
- Likely a problem with the proxy provided. Try using a different proxy ip and port from a site like http://free-proxy-list.net.
+If it's not budging, close out the program with ctrl+c and check that final.csv was written to.
+If it gets a ways through, an option would be to  find where the scraper left off. You can look at the ending product numbers in final.csv. 
+You can then rename final.csv to something else, and then remove the upper products that did run in productLinks.csv.
+You can then just run it again and it'll start from where it left off. just remember to move final.csv, or rename it. it will be overwritten if you don't and you might lose what you just ran.
+
+Q. Program never makes an http request after I run it (403 forbidden/proxyError)? 
+Try again with a different proxy.
