@@ -11,3 +11,4 @@ if __name__ == '__main__':
     install('aiohttp')
     install('bs4')
     install('lxml')
+    install('selenium')

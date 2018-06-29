@@ -1,20 +1,34 @@
-This is an async re-write of the scrape.py module. This only performs the second-half (scrape), not the search itself. You can still run the search from the original.
+This is a re-structure of the original crawler. Tkinter has been removed to reduce memory overhead issues. Asynchronous requests have been implemented with various cacheing, timeouts, a semaphore, and limits so as to keep the client safe and GSA's servers from dying (sorry).
 
-### This is a command-line utility - first open cmd
-- In your windows search bar, type in 'cmd' and hit enter.
-
-### Install the module dependencies with python via Entering in your cmd/terminal
+# Initial setup - Install the module dependencies with python via Entering in your cmd/terminal
 - python3 pipinstaller.py
 
-# PEFORMING A SCRAPE
+# PEFORMING A SEARCH
 ### Get a proxy ip address and port such as **111.11.111.111:80** from https://free-proxy-list.net/
 - A US based proxy is ideal
 - You can click the Https table header and it will sort either way
 - Confirm the Https column value is 'Yes'
 - Confirm the Anonymity column value is 'Anonymous'
 
-### Run the program by entering
-- python3 main.py
+### Run the search.py by entering
+- python3 search.py
+- Enter the IP (111.11.111.111) when prompted by the program
+- Enter the port (80 in this example)
+
+### Wait for the program to complete, then check productLinks.csv.
+
+
+# PEFORMING A SCRAPE
+Once productLinks.csv exists in the csv folder, you can run scrape.py
+
+### Get a proxy ip address and port (or use the same one) from https://free-proxy-list.net/
+- A US based proxy is ideal
+- You can click the Https table header and it will sort either way
+- Confirm the Https column value is 'Yes'
+- Confirm the Anonymity column value is 'Anonymous'
+
+### Run the scrape by entering
+- python3 scrape.py
 - Enter the IP (111.11.111.111) when prompted by the program
 - Enter the port (80 in this example)
 
