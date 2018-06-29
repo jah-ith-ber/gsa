@@ -17,7 +17,6 @@ This is a re-structure of the original crawler. Tkinter has been removed to redu
 
 ### Wait for the program to complete, then check productLinks.csv.
 
-
 # PEFORMING A SCRAPE
 Once productLinks.csv exists in the csv folder, you can run scrape.py
 
@@ -47,4 +46,8 @@ Once productLinks.csv exists in the csv folder, you can run scrape.py
 - You can then just run it again and it'll start from where it left off. Just remember to rename final.csv. It will be overwritten if you don't and you might lose what you just ran!
 
 ##### Q. Program never makes an http request after I run it (403 forbidden/proxyError)? 
-- Try again with a different proxy.
+- Try again with a different proxy, preferably one in the US at it has less distance to travel.
+
+##### Q. It can't find the CSV's?
+- search.py reads from the tony-export.csv file in the /csv folder.
+- scrape.py reads from the productLinks.csv in the /csv folder that running search.py produces.
